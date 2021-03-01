@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour {
     
@@ -15,10 +13,11 @@ public class MovingPlatform : MonoBehaviour {
 
     // We want fixed since we apply force
     private void FixedUpdate() {
+        // adapt speed
+
         transform.position += Vector3.up * speed;
 
         if (!renderer.isVisible) {
-            //Destroy(gameObject);
             spawner.Notify(gameObject);
             gameObject.SetActive(false);
         }

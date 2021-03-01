@@ -22,12 +22,16 @@ public class MainCharacter : MonoBehaviour {
         rigidbody.MovePosition(newPosition);
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Bounds") {
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "Bounds") {
+            Debug.Log("Touched bounds");
             // game over
-        }
+        }        
+    }
 
-        if (collision.gameObject.tag == "Score") {
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.tag == "Score") {
+            Debug.Log("Scored");
             // increase points
         }
     }

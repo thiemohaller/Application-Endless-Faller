@@ -1,16 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
-{
-    [SerializeField] private float speed;
+public class MovingPlatform : MonoBehaviour {
+    
+    private float speed = 0.02f;
+    private Renderer renderer;
+    private Spawner spawner;
 
-    void Start()
-    {
+    private void Start() {
+        renderer = GetComponent<Renderer>();
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-            transform.position += Vector3.up * speed;
-    }
+    // We want fixed since we apply force
+    private void FixedUpdate() {
+        transform.position += Vector3.up * speed;
+
+        if (!renderer.isVisible) {
+            //Destroy(gameObject);
+            spawner.Notify(gameObject);
+            gameObject.SetActive(false);
+        }
+    }    
 }

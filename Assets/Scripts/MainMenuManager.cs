@@ -15,7 +15,7 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     private void Update() {
-        highScoreText.text = $"HighScore: {HighScore}";
+        highScoreText.text = $"High Score: {HighScore}";
     }
 
     public void ResetHighScore() {

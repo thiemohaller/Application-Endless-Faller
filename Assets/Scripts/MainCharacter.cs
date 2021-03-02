@@ -10,19 +10,14 @@ public class MainCharacter : MonoBehaviour {
         
     private Movement Movement;
     
-    // Lock rotation so that the player doesn't tumble, using Awake since we do not need any other objects
-    private void Awake() {
-        rigidbody.freezeRotation = true;
-    }
-
+    // Lock rotation so that the player doesn't tumble
     private void Start() {
+        rigidbody.freezeRotation = true;
         Movement = gameObject.AddComponent<Movement>();
         Movement.PlayerSpeed = playerSpeed;
     }
 
-    // Since we apply force, we want `FixedUpdate` to keep it consistant    
     void FixedUpdate() {
-        // Movement
         var calculatedNewPosition = Movement.Calculate(
             Input.GetAxisRaw("Horizontal"), 
             Time.deltaTime);

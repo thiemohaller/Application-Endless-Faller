@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 /// <summary> Manages the state of the level </summary>
 public class LevelManager : MonoBehaviour {
-    // only public because of testing, set should be private 
+    // only public because of testing, set should be private
     public int Score { get; set; }
 
     public int scoreModifier = 1;
@@ -43,16 +43,23 @@ public class LevelManager : MonoBehaviour {
     void Update() {
         scoreText.text = $"Score: {Score}";
         gameOverScore.text = $"Your score: {Score}";
-        highScoreText.text = $"Prev. HS: {previousHighScore}";
+        highScoreText.text = $"High Score: {previousHighScore}";
 
+        IncreaseDifficulty();
+    }
+
+    private void IncreaseDifficulty() {
         timePassed += Time.deltaTime;
+
         if (timePassed > secondsBetweenDifficultyIncrease) {
             platformSpawner.platformSpeed += 0.01f;
             platformSpawner.timeBetweenSpawns -= 0.40f;
+            
             if (platformSpawner.timeBetweenSpawns <= .75f) {
                 platformSpawner.timeBetweenSpawns = .75f;
-                Debug.Log("Cannot go lower");
+                Debug.Log("Cannot increase spawnrate.");
             }
+
             Debug.Log($"Increasing difficulty: speed: {platformSpawner.platformSpeed}, intervall: {platformSpawner.timeBetweenSpawns}");
 
             timePassed = 0f;
@@ -62,6 +69,7 @@ public class LevelManager : MonoBehaviour {
     public void IncrementScore() {
 
         if (lockScore) {
+            // this prevents the high score from being altered, after the game has ended (player kept falling through score trigger => increased points...
             return;
         }
 

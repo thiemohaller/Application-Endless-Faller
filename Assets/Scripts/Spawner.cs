@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour {
         if (Time.time >= timeToSpawn) {
             SpawnerLogic();
             timeToSpawn = Time.time + timeBetweenSpawns;
-            Debug.Log($"Currently spawned: {spawnedObjects.Count}");
+            Debug.Log($"Currently spawned platforms: {spawnedObjects.Count}");
         }
 
         foreach (var platform in spawnedObjects) {

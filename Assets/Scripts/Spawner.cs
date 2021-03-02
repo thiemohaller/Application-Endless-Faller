@@ -5,10 +5,11 @@ public class Spawner : MonoBehaviour {
     [HideInInspector]
     public float timeBetweenSpawns = 3f;
     public float platformSpeed = 0.02f;
+    public List<GameObject> spawnedObjects;
 
     private GameObject[] platformPrefabs;
     private float timeToSpawn = 0.02f; // time until spawning for the first time
-    private List<GameObject> spawnedObjects;
+
 
     private void Awake() {
         platformPrefabs = Resources.LoadAll<GameObject>("PlatformPrefabs");               
@@ -19,6 +20,11 @@ public class Spawner : MonoBehaviour {
         if (Time.time >= timeToSpawn) {
             SpawnerLogic();
             timeToSpawn = Time.time + timeBetweenSpawns;
+            Debug.Log($"Currently spawned: {spawnedObjects.Count}");
+        }
+
+        foreach (var platform in spawnedObjects) {
+            platform.GetComponent<MovingPlatform>().Speed = platformSpeed;
         }
     }
 

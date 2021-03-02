@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public GameObject spawnProtection;
     public Spawner platformSpawner;
     public int secondsBetweenDifficultyIncrease = 10;
+    [HideInInspector]
+    public bool lockScore = false;
 
     private int newHighScore = 0;
     private int previousHighScore = 0;
@@ -44,11 +46,11 @@ public class LevelManager : MonoBehaviour
 
         timePassed += Time.deltaTime;
         if (timePassed > secondsBetweenDifficultyIncrease) {
-            platformSpawner.platformSpeed += 0.005f;
-            platformSpawner.timeBetweenSpawns -= 0.20f;
-            Debug.Log("Increasing difficulty");
-            if (platformSpawner.timeBetweenSpawns <= 1f) {
-                platformSpawner.timeBetweenSpawns = 1f;
+            platformSpawner.platformSpeed += 0.01f;
+            platformSpawner.timeBetweenSpawns -= 0.40f;
+            Debug.Log($"Increasing difficulty: speed: {platformSpawner.platformSpeed}, intervall: {platformSpawner.timeBetweenSpawns}");
+            if (platformSpawner.timeBetweenSpawns <= .75f) {
+                platformSpawner.timeBetweenSpawns = .75f;
                 Debug.Log("Cannot go lower");
             }
 
@@ -57,6 +59,11 @@ public class LevelManager : MonoBehaviour
     }
 
     public void IncrementScore() {
+
+        if (lockScore) {
+            return;
+        }
+
         Score += scoreModifier;
 
         if (Score > previousHighScore) {
@@ -73,6 +80,7 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver() {
         endScreen.SetActive(true);
+        lockScore = true;
     }
 
     public void Restart() {

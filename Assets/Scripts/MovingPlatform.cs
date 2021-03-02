@@ -9,10 +9,4 @@ public class MovingPlatform : MonoBehaviour {
         // adapt speed
         transform.position += Vector3.up * Speed;
     }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Bounds")) {
-            Destroy(this);
-        }
-    }
 }

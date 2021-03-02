@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - Bounds
   - Score
+  - Platform
   layers:
   - Default
   - TransparentFX

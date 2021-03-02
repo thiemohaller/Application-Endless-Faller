@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
+    [HideInInspector]
     public float timeBetweenSpawns = 3f;
     public float platformSpeed = 0.02f;
 
@@ -28,6 +29,7 @@ public class Spawner : MonoBehaviour {
         var currentPlatform = Instantiate(platformPrefabs[randomInteger], transform);        
         currentPlatform.transform.rotation = Quaternion.identity;
         // By using the line below, we only have to reference a `Spawner` object in the LevelManager 
+        // TODO look into adjusting speed on all existing spawned objects -> especially performance
         currentPlatform.GetComponent<MovingPlatform>().Speed = platformSpeed;
 
         // In order to create "more" prefabs, rotate platform half the time, using a `coinflip`

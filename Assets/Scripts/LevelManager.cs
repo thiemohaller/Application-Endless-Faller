@@ -16,11 +16,13 @@ public class LevelManager : MonoBehaviour
     public Text newHighScoreBanner;
     public Text gameOverScore;
     public GameObject endScreen;
+    public GameObject spawnProtection;
     public Spawner platformSpawner;
-    public int secondsBetweenDifficultyIncrease = 5;
+    public int secondsBetweenDifficultyIncrease = 10;
 
     private int newHighScore = 0;
     private int previousHighScore = 0;
+    private readonly int timeToDestruct = 3;
     private bool firstTimeNewHighScore = true;
     private float timePassed;
     
@@ -31,6 +33,8 @@ public class LevelManager : MonoBehaviour
         newHighScoreBanner.gameObject.SetActive(false);
         endScreen.SetActive(false);
         timePassed = 0f;
+
+        Destroy(spawnProtection, timeToDestruct);
     }
 
     void Update() {
@@ -40,8 +44,8 @@ public class LevelManager : MonoBehaviour
 
         timePassed += Time.deltaTime;
         if (timePassed > secondsBetweenDifficultyIncrease) {
-            platformSpawner.platformSpeed += 0.01f;
-            platformSpawner.timeBetweenSpawns -= 0.5f;
+            platformSpawner.platformSpeed += 0.005f;
+            platformSpawner.timeBetweenSpawns -= 0.20f;
             Debug.Log("Increasing difficulty");
             if (platformSpawner.timeBetweenSpawns <= 1f) {
                 platformSpawner.timeBetweenSpawns = 1f;

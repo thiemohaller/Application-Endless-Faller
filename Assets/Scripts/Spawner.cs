@@ -8,12 +8,10 @@ public class Spawner : MonoBehaviour {
     private GameObject[] platformPrefabs;
     private float timeToSpawn = .2f; // time until spawning for the first time
     private List<GameObject> spawnedObjects;
-    private List<GameObject> taggedForDeletion;
 
     private void Awake() {
         platformPrefabs = Resources.LoadAll<GameObject>("PlatformPrefabs");               
         spawnedObjects = new List<GameObject>();
-        taggedForDeletion = new List<GameObject>();
     }
 
     private void Update() {
@@ -21,15 +19,6 @@ public class Spawner : MonoBehaviour {
             SpawnerLogic();
             timeToSpawn = Time.time + timeBetweenSpawns;
         }
-
-        if (taggedForDeletion.Count > amountToPool) {
-            taggedForDeletion.Clear();
-        }
-    }
-
-    internal void Notify(GameObject movingPlatform) {
-        spawnedObjects.Remove(movingPlatform);
-        taggedForDeletion.Add(movingPlatform);
     }
 
     void SpawnerLogic() {

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 /// <summary> Manages the state of the whole application </summary>
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private string gameScene;
+    [SerializeField] 
+    private string gameScene;
 
     public void Play()
     {

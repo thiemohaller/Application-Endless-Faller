@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,6 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-
-    private const string MainMenu = "Home";
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -27,7 +26,9 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void LoadMenu() {
-        SceneManager.LoadScene(MainMenu);
+        Time.timeScale = 1;
+        GameIsPaused = false;
+        SceneManager.LoadScene(ProjectConstants.SCENE_MAIN_MENU);
     }
 
     public void QuitGame() {

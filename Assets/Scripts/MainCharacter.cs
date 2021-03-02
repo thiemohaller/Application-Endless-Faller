@@ -4,22 +4,30 @@ using UnityEngine;
 public class MainCharacter : MonoBehaviour {
 
     public new Rigidbody rigidbody;
-    public float swerveForce = 5f;
-    [Range(1, 10)]
-    public int playerSpeedMultiplier = 2;
+    [Range(1, 30)]
+    public int playerSpeed = 10;
     public LevelManager lvlManager;
+        
+    private Movement Movement;
     
     // Lock rotation so that the player doesn't tumble, using Awake since we do not need any other objects
     private void Awake() {
         rigidbody.freezeRotation = true;
     }
 
+    private void Start() {
+        Movement = gameObject.AddComponent<Movement>();
+        Movement.PlayerSpeed = playerSpeed;
+    }
+
     // Since we apply force, we want `FixedUpdate` to keep it consistant    
     void FixedUpdate() {
         // Movement
-        float xPosition = Input.GetAxis("Horizontal") * Time.fixedDeltaTime * swerveForce * playerSpeedMultiplier;
-        Vector3 newPosition = rigidbody.position + Vector3.right * xPosition;
-        rigidbody.MovePosition(newPosition);
+        var calculatedNewPosition = Movement.Calculate(
+            Input.GetAxisRaw("Horizontal"), 
+            Time.deltaTime);
+
+        rigidbody.MovePosition(rigidbody.position + calculatedNewPosition);
     }
 
     /// <summary>

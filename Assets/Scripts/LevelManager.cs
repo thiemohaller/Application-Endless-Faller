@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary> Manages the state of the level </summary>
-public class LevelManager : MonoBehaviour
-{
-    public int Score { get; private set; }
+public class LevelManager : MonoBehaviour {
+    // only public because of testing, set should be private 
+    public int Score { get; set; }
 
     public int scoreModifier = 1;
     public Text scoreText;
@@ -22,8 +22,9 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public bool lockScore = false;
 
-    private int newHighScore = 0;
-    private int previousHighScore = 0;
+    // only public because of testing
+    public int newHighScore = 0;
+    public int previousHighScore = 0;
     private readonly int timeToDestruct = 3;
     private bool firstTimeNewHighScore = true;
     private float timePassed;
@@ -48,11 +49,11 @@ public class LevelManager : MonoBehaviour
         if (timePassed > secondsBetweenDifficultyIncrease) {
             platformSpawner.platformSpeed += 0.01f;
             platformSpawner.timeBetweenSpawns -= 0.40f;
-            Debug.Log($"Increasing difficulty: speed: {platformSpawner.platformSpeed}, intervall: {platformSpawner.timeBetweenSpawns}");
             if (platformSpawner.timeBetweenSpawns <= .75f) {
                 platformSpawner.timeBetweenSpawns = .75f;
                 Debug.Log("Cannot go lower");
             }
+            Debug.Log($"Increasing difficulty: speed: {platformSpawner.platformSpeed}, intervall: {platformSpawner.timeBetweenSpawns}");
 
             timePassed = 0f;
         }

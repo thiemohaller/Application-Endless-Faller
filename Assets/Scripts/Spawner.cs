@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
     public float timeBetweenSpawns = 3f;
-    public int amountToPool = 20;
+    public float platformSpeed = 0.02f;
 
     private GameObject[] platformPrefabs;
-    private float timeToSpawn = .2f; // time until spawning for the first time
+    private float timeToSpawn = 0.02f; // time until spawning for the first time
     private List<GameObject> spawnedObjects;
 
     private void Awake() {
@@ -27,6 +27,8 @@ public class Spawner : MonoBehaviour {
 
         var currentPlatform = Instantiate(platformPrefabs[randomInteger], transform);        
         currentPlatform.transform.rotation = Quaternion.identity;
+        // By using the line below, we only have to reference a `Spawner` object in the LevelManager 
+        currentPlatform.GetComponent<MovingPlatform>().Speed = platformSpeed;
 
         // In order to create "more" prefabs, rotate platform half the time, using a `coinflip`
         if (random.Next(0, 2) == 0) {

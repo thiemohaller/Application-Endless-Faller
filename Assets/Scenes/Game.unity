@@ -1252,7 +1252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842452700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.87, z: 0}
+  m_LocalPosition: {x: 0, y: -5.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1270,7 +1270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67c2c9c83616b4fa0788e247274274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenSpawns: 3
+  timeBetweenSpawns: 5
+  platformSpeed: 0.02
   amountToPool: 20
 --- !u!1 &974937592
 GameObject:
@@ -2682,6 +2683,8 @@ MonoBehaviour:
   newHighScoreBanner: {fileID: 1785378587}
   gameOverScore: {fileID: 1381304413}
   endScreen: {fileID: 166305197}
+  platformSpawner: {fileID: 842452705}
+  secondsBetweenDifficultyIncrease: 3
 --- !u!4 &1999660169
 Transform:
   m_ObjectHideFlags: 0
@@ -3035,6 +3038,11 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 1398780993}
+    - target: {fileID: 5662799565086317040, guid: c397f1da67ce9004db73ec7ce310f025,
+        type: 3}
+      propertyPath: lvlManager
+      value: 
+      objectReference: {fileID: 1999660168}
     - target: {fileID: 5662799565086317040, guid: c397f1da67ce9004db73ec7ce310f025,
         type: 3}
       propertyPath: playerSpeedMultiplier

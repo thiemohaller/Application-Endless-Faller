@@ -2,12 +2,12 @@
 
 public class MovingPlatform : MonoBehaviour {
     
-    private float speed = 0.02f;
+    public float Speed { get; set; }
 
     // We want fixed since we apply force
     private void FixedUpdate() {
         // adapt speed
-        transform.position += Vector3.up * speed;
+        transform.position += Vector3.up * Speed;
     }
 
     private void OnTriggerEnter(Collider other) {

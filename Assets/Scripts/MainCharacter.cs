@@ -14,12 +14,6 @@ public class MainCharacter : MonoBehaviour {
         rigidbody.freezeRotation = true;
     }
 
-    private void Start() {
-        if (lvlManager == null) {
-            lvlManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        }
-    }
-
     // Since we apply force, we want `FixedUpdate` to keep it consistant    
     void FixedUpdate() {
         // Movement
@@ -34,12 +28,12 @@ public class MainCharacter : MonoBehaviour {
     /// <param name="other">Collider which is used to detect if it was a boundary block</param>
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Bounds")) {
-            FindObjectOfType<LevelManager>().GameOver();
+            lvlManager.GameOver();
         }        
     }
 
     /// <summary>
-    ///     This method is used to tally the scores
+    ///     This method is used to tally the scores, I chose exit since it makes it harder to run into erronous detection
     /// </summary>
     /// <param name="other">Collider which is used to detect if it was a score block</param>
     private void OnTriggerExit(Collider other) {

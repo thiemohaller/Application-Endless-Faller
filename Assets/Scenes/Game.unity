@@ -2778,7 +2778,7 @@ MonoBehaviour:
   endScreen: {fileID: 166305197}
   spawnProtection: {fileID: 642173369}
   platformSpawner: {fileID: 842452705}
-  secondsBetweenDifficultyIncrease: 3
+  secondsBetweenDifficultyIncrease: 10
   lockScore: 0
   newHighScore: 0
   previousHighScore: 0
